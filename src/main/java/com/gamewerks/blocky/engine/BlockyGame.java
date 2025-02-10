@@ -39,6 +39,7 @@ public class BlockyGame {
             break;
         case RIGHT:
             nextPos = activePiece.getPosition().add(0, 1);
+            break;
         default:
             throw new IllegalStateException("Unrecognized direction: " + movement.name());
         }
@@ -69,6 +70,7 @@ public class BlockyGame {
     
     public void step() {
         trySpawnBlock();
+        processMovement();
         processGravity();
         processClearedLines();
     }
@@ -79,6 +81,7 @@ public class BlockyGame {
     
     public Piece getActivePiece() { return activePiece; }
     public void setDirection(Direction movement) { this.movement = movement; }
+    
     public void rotatePiece(boolean dir) {
         Piece test = new Piece(activePiece.getKind(), activePiece.getPosition());
         int currentOrientation = test.getOrientation();
