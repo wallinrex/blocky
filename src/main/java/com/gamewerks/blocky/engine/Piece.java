@@ -37,6 +37,23 @@ public class Piece {
         pos = p;
     }
     
+    public int getOrientation() {
+        return orientation;
+    }
+    
+    public void setOrientation(int n) {
+        if (n < 0 || n > 3) {
+            orientation = 0;
+        }
+        else {
+            orientation = n;
+        }
+    }
+    
+    public PieceKind getKind() {
+        return kind;
+    }
+    
     public boolean[][] getLayout() {
         return ((boolean[][][]) ROTATION_DATA.get(kind))[orientation];
     }

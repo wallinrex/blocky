@@ -79,5 +79,18 @@ public class BlockyGame {
     
     public Piece getActivePiece() { return activePiece; }
     public void setDirection(Direction movement) { this.movement = movement; }
-    public void rotatePiece(boolean dir) { activePiece.rotate(dir); }
+    public void rotatePiece(boolean dir) {
+        Piece test = new Piece(activePiece.getKind(), activePiece.getPosition());
+        int currentOrientation = test.getOrientation();
+        test.setOrientation(currentOrientation);
+        if (dir) {
+            test.setOrientation((currentOrientation + 1) % 4);
+        } else {
+            int k = currentOrientation - 1;
+            test.setOrientation(k < 0 ? 3 : k);
+        }
+        if (!board.collides(test.getLayout(), test.getPosition())) {
+            activePiece.rotate(dir);
+        }
+    }
 }
